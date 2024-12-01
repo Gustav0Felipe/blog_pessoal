@@ -14,47 +14,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.Postagem;
-import com.repository.PostagemRepository;
+import com.model.Tema;
+import com.repository.TemaRepository;
 
 @RestController
-@RequestMapping("/postagens")
+@RequestMapping("/temas")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class PostagemController {
+public class TemaController {
 
 	
 	@Autowired
-	PostagemRepository postagemRepository;
+	TemaRepository temaRepository;
 	
 	
 	@GetMapping
-	public ResponseEntity<List<Postagem>> listarPostagens() {
-		return ResponseEntity.ok(postagemRepository.findAll());
+	public ResponseEntity<List<Tema>> listarPostagens() {
+		return ResponseEntity.ok(temaRepository.findAll());
 	}
 	
-	@GetMapping("/titulo={titulo}")
-	public ResponseEntity<List<Postagem>> listarPorTitulo(@PathVariable String titulo){
-		return ResponseEntity.ok(postagemRepository.findAllByTituloContainingIgnoreCase(titulo));
+	@GetMapping("/descricao={descricao}")
+	public ResponseEntity<List<Tema>> listarPorTitulo(@PathVariable String descricao){
+		return ResponseEntity.ok(temaRepository.findAllByDescricaoContainingIgnoreCase(descricao));
 	}
+	
 	@GetMapping("/id={id}")
-	public ResponseEntity<Postagem> listarPorId(@PathVariable Long id){
-		return ResponseEntity.ok(postagemRepository.findById(id).orElse(null));
+	public ResponseEntity<Tema> listarPorId(@PathVariable Long id){
+		return ResponseEntity.ok(temaRepository.findById(id).orElse(null));
 	}
 	
 	@PostMapping("/post")
-	public ResponseEntity<Postagem> salvarPostagem(@RequestBody Postagem postagem){
-		return ResponseEntity.ok(postagemRepository.save(postagem));
+	public ResponseEntity<Tema> salvarPostagem(@RequestBody Tema tema){
+		return ResponseEntity.ok(temaRepository.save(tema));
 	}
 	
 	@PutMapping("/post")
-	public ResponseEntity<Postagem> updatePostagem(@RequestBody Postagem postagem){
-		return ResponseEntity.ok(postagemRepository.save(postagem));
+	public ResponseEntity<Tema> updatePostagem(@RequestBody Tema tema){
+		return ResponseEntity.ok(temaRepository.save(tema));
 	}
 	
 	@DeleteMapping("/delete/id={id}")
 	public ResponseEntity<String> deletePostagem(@PathVariable Long id){
-		if(postagemRepository.existsById(id)) {
-			postagemRepository.deleteById(id);
+		if(temaRepository.existsById(id)) {
+			temaRepository.deleteById(id);
 			return ResponseEntity.ok("Deletado com Sucesso!.");
 		}else {
 			return ResponseEntity.badRequest().body("O ID informado não existe.");

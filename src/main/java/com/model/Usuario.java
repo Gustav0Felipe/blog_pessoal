@@ -20,7 +20,7 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_usuario;
+	private Long id;
 	
 	@NotNull
 	private String nome;
@@ -39,11 +39,11 @@ public class Usuario {
 	private Collection<Postagem> postagem;
 
 	public Long getId() {
-		return id_usuario;
+		return id;
 	}
 
 	public void setId(Long id_usuario) {
-		this.id_usuario = id_usuario;
+		this.id = id_usuario;
 	}
 
 	public String getNome() {
