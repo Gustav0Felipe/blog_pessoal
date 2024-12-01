@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.model.Postagem;
 
-public interface PostagemRepository extends JpaRepository<Postagem, Integer>{
+public interface PostagemRepository extends JpaRepository<Postagem, Long>{
 
 	List<Postagem> findAll();
 	
+	List<Postagem> findAllByTituloContainingIgnoreCase(String titulo);
 }
