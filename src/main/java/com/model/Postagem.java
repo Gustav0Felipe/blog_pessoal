@@ -10,10 +10,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Table(name = "tb_postagens")
 @Entity
@@ -23,23 +23,23 @@ public class Postagem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long postagem_id;
 	
-	@NotNull
+	@NotBlank(message = "O atributo título é Obrigatório!") 
+	@Size(min = 5, max = 100, message = "O atributo título deve conter no mínimo 05 e no máximo 100 caracteres")
 	private String titulo;
 	
-	@NotNull
+	@NotBlank(message = "O atributo texto é Obrigatório!")
+	@Size(min = 10, max = 1000, message = "O atributo texto deve conter no mínimo 10 e no máximo 1000 caracteres")
 	private String texto;
-
+	
 	@UpdateTimestamp
 	private LocalDateTime data;
 
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
-	@JoinColumn(name="tema_id")
 	private Tema tema;
 
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
-	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 
 	public Long getId() {
