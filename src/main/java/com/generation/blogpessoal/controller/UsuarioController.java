@@ -1,4 +1,4 @@
-package com.controller;
+package com.generation.blogpessoal.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.Usuario;
-import com.model.UsuarioLogin;
-import com.repository.UsuarioRepository;
-import com.service.UsuarioService;
+import com.generation.blogpessoal.model.Usuario;
+import com.generation.blogpessoal.model.UsuarioLogin;
+import com.generation.blogpessoal.repository.UsuarioRepository;
+import com.generation.blogpessoal.service.UsuarioService;
 
 import jakarta.validation.Valid;
 
@@ -34,7 +34,7 @@ public class UsuarioController {
 	private UsuarioRepository usuarioRepository;
 	
 	@GetMapping("/all")
-	public ResponseEntity <List<Usuario>> getAll(){
+	public ResponseEntity<List<Usuario>> getAll(){
 		return ResponseEntity.ok(usuarioRepository.findAll());
 	}
 
@@ -42,7 +42,7 @@ public class UsuarioController {
 	public ResponseEntity<Usuario> getById(@PathVariable Long id) {
 		return usuarioRepository.findById(id)
 			.map(resposta -> ResponseEntity.ok(resposta))
-			.orElse(ResponseEntity.notFound().build());
+			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
 	@PostMapping("/logar")

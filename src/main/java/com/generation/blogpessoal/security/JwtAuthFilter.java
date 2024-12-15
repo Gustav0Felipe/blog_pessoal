@@ -1,4 +1,4 @@
-package com.security;
+package com.generation.blogpessoal.security;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.service.UserDetailsServiceImpl;
+import com.generation.blogpessoal.service.UserDetailsServiceImpl;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;

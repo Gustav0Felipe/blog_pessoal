@@ -1,4 +1,4 @@
-package com.service;
+package com.generation.blogpessoal.service;
 
 import java.util.Optional;
 
@@ -11,10 +11,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.model.Usuario;
-import com.model.UsuarioLogin;
-import com.repository.UsuarioRepository;
-import com.security.JwtService;
+import com.generation.blogpessoal.model.Usuario;
+import com.generation.blogpessoal.model.UsuarioLogin;
+import com.generation.blogpessoal.repository.UsuarioRepository;
+import com.generation.blogpessoal.security.JwtService;
 
 @Service
 public class UsuarioService {
@@ -29,7 +29,8 @@ public class UsuarioService {
     private AuthenticationManager authenticationManager;
 
 	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
-		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
+		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent() 
+				|| (usuario.getId() != null && usuarioRepository.existsById(usuario.getId())))
 			return Optional.empty();
 
 		usuario.setSenha(criptografarSenha(usuario.getSenha()));
@@ -42,7 +43,7 @@ public class UsuarioService {
 
 			Optional<Usuario> buscaUsuario = usuarioRepository.findByUsuario(usuario.getUsuario());
 
-			if ( (buscaUsuario.isPresent()) && ( buscaUsuario.get().getId() != usuario.getId()))
+			if ((buscaUsuario.isPresent()) && ( buscaUsuario.get().getId() != usuario.getId()))
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existe!", null);
 
 			usuario.setSenha(criptografarSenha(usuario.getSenha()));

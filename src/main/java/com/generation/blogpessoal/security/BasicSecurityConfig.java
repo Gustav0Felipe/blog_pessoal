@@ -1,4 +1,4 @@
-package com.security;
+package com.generation.blogpessoal.security;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.service.UserDetailsServiceImpl;
+import com.generation.blogpessoal.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity

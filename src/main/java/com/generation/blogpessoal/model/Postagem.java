@@ -1,4 +1,4 @@
-package com.model;
+package com.generation.blogpessoal.model;
 
 import java.time.LocalDateTime;
 
@@ -32,7 +32,7 @@ public class Postagem {
 	private String texto;
 	
 	@UpdateTimestamp
-	private LocalDateTime data;
+	private LocalDateTime data;	
 
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
