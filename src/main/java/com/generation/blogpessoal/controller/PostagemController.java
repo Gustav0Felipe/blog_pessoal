@@ -36,22 +36,22 @@ public class PostagemController {
 	public ResponseEntity<List<Postagem>> listarPorTitulo(@PathVariable String titulo){
 		return ResponseEntity.ok(postagemRepository.findAllByTituloContainingIgnoreCase(titulo));
 	}
-	@GetMapping("/id={id}")
-	public ResponseEntity<Postagem> listarPorId(@PathVariable Long id){
+	@GetMapping("/{id}")
+	public ResponseEntity<Postagem> buscarPorId(@PathVariable Long id){
 		return ResponseEntity.ok(postagemRepository.findById(id).orElse(null));
 	}
 	
-	@PostMapping("/post")
+	@PostMapping
 	public ResponseEntity<Postagem> salvarPostagem(@RequestBody Postagem postagem){
 		return ResponseEntity.ok(postagemRepository.save(postagem));
 	}
 	
-	@PutMapping("/post")
+	@PutMapping
 	public ResponseEntity<Postagem> updatePostagem(@RequestBody Postagem postagem){
 		return ResponseEntity.ok(postagemRepository.save(postagem));
 	}
 	
-	@DeleteMapping("/delete/id={id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deletePostagem(@PathVariable Long id){
 		if(postagemRepository.existsById(id)) {
 			postagemRepository.deleteById(id);

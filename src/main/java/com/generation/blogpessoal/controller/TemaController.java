@@ -28,7 +28,7 @@ public class TemaController {
 	
 	
 	@GetMapping
-	public ResponseEntity<List<Tema>> listarPostagens() {
+	public ResponseEntity<List<Tema>> listarTemas() {
 		return ResponseEntity.ok(temaRepository.findAll());
 	}
 	
@@ -37,23 +37,26 @@ public class TemaController {
 		return ResponseEntity.ok(temaRepository.findAllByDescricaoContainingIgnoreCase(descricao));
 	}
 	
-	@GetMapping("/id={id}")
-	public ResponseEntity<Tema> listarPorId(@PathVariable Long id){
+	@GetMapping("/{id}")
+	public ResponseEntity<Tema> buscarPorId(@PathVariable Long id){
 		return ResponseEntity.ok(temaRepository.findById(id).orElse(null));
 	}
 	
-	@PostMapping("/post")
-	public ResponseEntity<Tema> salvarPostagem(@RequestBody Tema tema){
+	@PostMapping
+	public ResponseEntity<Tema> salvarTema(@RequestBody Tema tema){
 		return ResponseEntity.ok(temaRepository.save(tema));
 	}
 	
-	@PutMapping("/post")
-	public ResponseEntity<Tema> updatePostagem(@RequestBody Tema tema){
-		return ResponseEntity.ok(temaRepository.save(tema));
+	@PutMapping
+	public ResponseEntity<Tema> updateTema(@RequestBody Tema tema){
+		if(temaRepository.existsById(tema.getId()))
+			return ResponseEntity.ok(temaRepository.save(tema));
+		else
+			return ResponseEntity.notFound().build();
 	}
 	
-	@DeleteMapping("/delete/id={id}")
-	public ResponseEntity<String> deletePostagem(@PathVariable Long id){
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> deleteTema(@PathVariable Long id){
 		if(temaRepository.existsById(id)) {
 			temaRepository.deleteById(id);
 			return ResponseEntity.ok("Deletado com Sucesso!.");

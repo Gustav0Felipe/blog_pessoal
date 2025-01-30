@@ -20,7 +20,7 @@ public class Tema {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long tema_id;
+	private Long id;
 	
 	@NotNull
 	private String descricao;
@@ -30,11 +30,11 @@ public class Tema {
 	private Collection<Postagem> postagem;
 
 	public Long getId() {
-		return tema_id;
+		return id;
 	}
 
-	public void setId(Long tema_id) {
-		this.tema_id = tema_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getDescricao() {
